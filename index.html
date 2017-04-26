@@ -18,27 +18,36 @@
     <br/>
     <br/>
     <div class="jumbotron">
-      <h1>Free WebSockets</h1>
-      <form class="form-inline2" id="userForm">
-        <div class="form-group">
-          <label for="senderId" class="control-label">Sender</label>
-          <div class="input-group">
-            <input class="form-control" id="senderId" placeholder="senderId" value="Sender id">
-            <div class="input-group-btn">
-              <button class="btn btn-success" id="connect">Connect</button>
+      <h1>Free WebSockets
+        <small>
+          <ul class="nav nav-pills pull-right">
+            <li class="type-switcher active" id="direct"><a href="#direct">Direct</a></li>
+            <li class="type-switcher" id="room"><a href="#rooms">Rooms</a></li>
+          </ul>
+        </small>
+      </h1>
+      <div id="directFrame">
+        <form id="userForm">
+          <div class="form-group">
+            <label for="senderId" class="control-label">Sender</label>
+            <div class="input-group">
+              <input class="form-control" id="senderId" placeholder="senderId" value="Sender id">
+              <div class="input-group-btn">
+                <button class="btn btn-success" id="connect">Connect</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-group">
-          <label for="receiverId" class="control-label">Receiver</label>
-          <input class="form-control" id="receiverId" placeholder="receiverId" value="Receiver id">
-        </div>
-        <div class="form-group">
-          <label for="message" class="control-label">Message</label>
-          <input class="form-control" id="message" placeholder="message" value="Hi!">
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
-      </form>
+          <div class="form-group">
+            <label for="receiverId" class="control-label">Receiver</label>
+            <input class="form-control" id="receiverId" placeholder="receiverId" value="Receiver id">
+          </div>
+          <div class="form-group">
+            <label for="message" class="control-label">Message</label>
+            <input class="form-control" id="message" placeholder="message" value="Hi!">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
+        </form>
+      </div>
       <h4>works with <a href="https://socket.io/" target="_blank">socket.io</a></h4>
     </div>
   </div>

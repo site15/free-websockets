@@ -3,6 +3,7 @@
 const express = require('express');
 const socketIO = require('socket.io');
 const path = require('path');
+const _ = require('lodash');
 
 const PORT = process.env.PORT || 5000;
 const INDEX = path.join(__dirname, 'index.html');
@@ -14,28 +15,39 @@ const server = express()
 	.listen(PORT, () => console.log(`Listening on ${PORT}`));
 const io = socketIO(server);
 const clients = [];
-function getClientByUserId(userId) {
-	for (var i = 0, len = clients.length; i < len; ++i) {
-		var c = clients[i];
-		if (c.userId == userId) {
-			return c;
-		}
+
+function getClientsByUserId(userId) {
+	userId = userId.trim().toLowerCase();
+	return _.filter(clients, { userId: userId });
+}
+
+function createClient(clientId, userId, password, customData) {
+	userId = userId.trim().toLowerCase();
+
+	var clientInfo = new Object();
+	clientInfo.userId = userId;
+	clientInfo.password = password;
+	clientInfo.customData = customData;
+	clientInfo.clientId = clientId;
+
+	var foundedClients = getClientsByUserId(userId);
+	if (foundedClients.length > 0 && foundedClients.length !== _.filter(foundedClients, { password: password }).length) {
+		return false;
+	} else {
+		clients.push(clientInfo);
+		return clientInfo;
 	}
-	return null;
 }
 
 io.on('connection', (client) => {
-	//console.log('Client connected');
-	client.on('setUser', function (userId, customData) {
-		//console.log('setUser', userId, customData);
-		var clientInfo = new Object();
-		clientInfo.userId = userId;
-		clientInfo.customData = customData;
-		clientInfo.clientId = client.id;
-		clients.push(clientInfo);
+	client.on('login', function (userId, password, customData) {
+		if (createClient(client.id, userId, password, customData)) {
+			client.emit('loginResult', true);
+		} else {
+			client.emit('loginResult', false);
+		}
 	});
 	client.on('disconnect', function (data) {
-		//console.log('disconnect', data);
 		for (var i = 0, len = clients.length; i < len; ++i) {
 			var c = clients[i];
 			if (c.clientId == client.id) {
@@ -45,19 +57,21 @@ io.on('connection', (client) => {
 		}
 	});
 	client.on('message', function (userId, message, messageId) {
-		//console.log('message', userId, message, messageId);
 		if (!userId || !message || !messageId) {
 			return;
 		}
-		var receiverData = getClientByUserId(userId);
-		//console.log('getClientByUserId', receiverData);
-		if (receiverData) {
-			client.broadcast.to(receiverData.clientId).emit('message', message);
-			client.emit('message:' + messageId, true);
-			//console.log('message:' + messageId, true);
+		var receiverClients = getClientsByUserId(userId);
+		var result = [];
+		for (var i = 0, len = receiverClients.length; i < len; i++) {
+			if (receiverClients[i]) {
+				client.broadcast.to(receiverClients[i].clientId).emit('message', message);
+				result.push(receiverClients[i].clientId);
+			}
+		}
+		if (result.length > 0) {
+			client.emit('messageResult#' + messageId, true);
 		} else {
-			client.emit('message:' + messageId, false);
-			//console.log('message:' + messageId, false);
+			client.emit('messageResult#' + messageId, false);
 		}
 	});
 });
