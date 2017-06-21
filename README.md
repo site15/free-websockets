@@ -1,5 +1,7 @@
 # Free WebSockets 
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/site15/free-websockets.svg)](https://greenkeeper.io/)
+
 ### works with socket.io
 
 https://free-websockets.herokuapp.com
