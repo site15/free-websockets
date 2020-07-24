@@ -1,5 +1,5 @@
 FROM node:12
-LABEL maintainer="ws@site15.ru"
+LABEL maintainer="admin@site15.ru"
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm ci --only=production

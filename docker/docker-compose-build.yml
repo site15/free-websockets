@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  web-service:
+    image: 'endykaufman/free-websockets'
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile

@@ -7,7 +7,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "docker:build": "./docker/docker-compose-build.sh",
+    "k8s:local:apply": "./k8s/local/apply.sh",
+    "k8s:local:build-apply": "npm run docker:build && npm run k8s:local:apply",
+    "k8s:local:dashboard": "microk8s dashboard-proxy"
   },
   "keywords": [],
   "author": "",

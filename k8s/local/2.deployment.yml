@@ -1,18 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: free-websockets
   name: web
   labels:
     app: free-websockets
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       pod: free-websockets-web-container
   template:
     metadata:
-      namespace: free-websockets
       labels:
         pod: free-websockets-web-container
     spec:
