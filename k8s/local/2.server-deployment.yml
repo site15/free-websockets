@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: free-websockets-server
-          image: endykaufman/free-websockets:local
+          image: free-websockets/server_service:local
           imagePullPolicy: Never
           ports:
             - containerPort: 5000

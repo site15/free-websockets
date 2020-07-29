@@ -7,8 +7,8 @@ networks:
 
 services:
   free-websockets-server:
-    image: 'endykaufman/free-websockets'
-    container_name: 'free-websockets-server-service'
+    image: 'free-websockets/server_service'
+    container_name: 'server_service'
     build:
       context: ../
       dockerfile: ./docker/Dockerfile

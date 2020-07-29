@@ -2,7 +2,7 @@ kind: Service
 apiVersion: v1
 metadata:
   namespace: free-websockets-local
-  name: free-websockets-server-service
+  name: server_service
 spec:
   selector:
     pod: free-websockets-server-container
