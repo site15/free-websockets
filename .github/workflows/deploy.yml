@@ -28,4 +28,21 @@ jobs:
       run: npm install      
 
     - name: Run build
-      run: npm run docker:build
+      run: npm run build
+
+    - name: Explain why this job ran
+      uses: monacorp/action-name@master
+      with:
+        entrypoint: /bin/echo
+        args: The ${{ github.event_name }} event triggered this step.
+        
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1
+      with:
+        dockerfile: docker/Dockerfile
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com/site15/free-websockets
+        repository: site15/free-websockets
+        tag_with_ref: true
+        tag_with_sha: true
