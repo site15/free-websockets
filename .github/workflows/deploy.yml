@@ -31,10 +31,7 @@ jobs:
       run: npm run build
 
     - name: Explain why this job ran
-      uses: monacorp/action-name@master
-      with:
-        entrypoint: /bin/echo
-        args: The ${{ github.event_name }} event triggered this step.
+      run: echo 'The ${{ github.event_name }} event triggered this step.'
         
     - name: Build and push Docker images
       uses: docker/build-push-action@v1
