@@ -1,58 +1,84 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Free WebSockets</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://bootswatch.com/3/darkly/bootstrap.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
 
-<head>
-  <title>Free WebSockets</title>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://bootswatch.com/3/darkly/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/2.3.1/url.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/2.3.1/url.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-
-<body>
-  <div class="container">
-    <br/>
-    <br/>
-    <div class="jumbotron">
-      <h1>Free WebSockets
-        <small>
-          <ul class="nav nav-pills pull-right">
-            <li class="type-switcher active" id="direct"><a href="#direct">Direct</a></li>
-            <li class="type-switcher" id="room"><a href="#rooms">Rooms</a></li>
-          </ul>
-        </small>
-      </h1>
-      <div id="directFrame">
-        <form id="userForm">
-          <div class="form-group">
-            <label for="senderId" class="control-label">Sender</label>
-            <div class="input-group">
-              <input class="form-control" id="senderId" placeholder="senderId" value="Sender id">
-              <div class="input-group-btn">
-                <button class="btn btn-success" id="connect">Connect</button>
+  <body>
+    <div class="container">
+      <br />
+      <br />
+      <div class="jumbotron">
+        <h1>
+          Free WebSockets
+          <small>
+            <ul class="nav nav-pills pull-right">
+              <li class="type-switcher active" id="direct">
+                <a href="#direct">Direct</a>
+              </li>
+              <li class="type-switcher" id="room">
+                <a href="#rooms">Rooms</a>
+              </li>
+            </ul>
+          </small>
+        </h1>
+        <div id="directFrame">
+          <form id="userForm">
+            <div class="form-group">
+              <label for="senderId" class="control-label">Sender</label>
+              <div class="input-group">
+                <input
+                  class="form-control"
+                  id="senderId"
+                  placeholder="senderId"
+                  value="Sender id"
+                />
+                <div class="input-group-btn">
+                  <button class="btn btn-success" id="connect">Connect</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="receiverId" class="control-label">Receiver</label>
-            <input class="form-control" id="receiverId" placeholder="receiverId" value="Receiver id">
-          </div>
-          <div class="form-group">
-            <label for="message" class="control-label">Message</label>
-            <input class="form-control" id="message" placeholder="message" value="Hi!">
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Send message</button>
-        </form>
+            <div class="form-group">
+              <label for="receiverId" class="control-label">Receiver</label>
+              <input
+                class="form-control"
+                id="receiverId"
+                placeholder="receiverId"
+                value="Receiver id"
+              />
+            </div>
+            <div class="form-group">
+              <label for="message" class="control-label">Message</label>
+              <input
+                class="form-control"
+                id="message"
+                placeholder="message"
+                value="Hi!"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              Send message
+            </button>
+          </form>
+        </div>
+        <h4>
+          works with <a href="https://socket.io/" target="_blank">socket.io</a>
+        </h4>
       </div>
-      <h4>works with <a href="https://socket.io/" target="_blank">socket.io</a></h4>
     </div>
-  </div>
-  <script type="text/javascript" src="socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="client.js"></script>
-</body>
-
+    <script type="text/javascript" src="socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="client.js"></script>
+  </body>
 </html>

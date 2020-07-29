@@ -8,17 +8,27 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "docker:build": "./docker/docker-compose-build.sh",
+    "docker:up": "npm run build && ./docker/docker-compose-up.sh",
+    "docker:down": "./docker/docker-compose-down.sh",
+    "docker:restart": "npm run docker:down && npm run docker:up",
+    "docker:build": "npm run build && ./docker/docker-compose-build.sh",
     "k8s:local:apply": "./k8s/local/apply.sh",
-    "k8s:local:build-apply": "npm run docker:build && npm run k8s:local:apply",
-    "k8s:local:dashboard": "microk8s dashboard-proxy"
+    "k8s:local:build-apply": "npm run build:local && ./k8s/local/build-apply.sh",
+    "k8s:local:dashboard": "microk8s dashboard-proxy",
+    "build:local": "node -r esm ./scripts/cli.js --base-href /free-websockets/",
+    "build": "node -r esm ./scripts/cli.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "express": "4.16.2",
-    "lodash": "^4.17.4",
-    "socket.io": "2.0.4"
+    "express": "4.17.1",
+    "lodash": "^4.17.19",
+    "socket.io": "2.3.0"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "commander": "^6.0.0",
+    "esm": "^3.2.25"
   }
 }

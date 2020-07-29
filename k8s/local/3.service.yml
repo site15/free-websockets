@@ -1,12 +1,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: web-service
+  namespace: free-websockets-local
+  name: free-websockets-server-service
 spec:
   selector:
-    pod: free-websockets-web-container
+    pod: free-websockets-server-container
   ports:
     - protocol: TCP
       port: 5000
       targetPort: 5000
-  type: NodePort
+  type: ClusterIP

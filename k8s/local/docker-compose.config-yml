@@ -2,7 +2,7 @@ version: '3'
 
 services:
   free-websockets-server:
-    image: 'endykaufman/free-websockets'
+    image: 'endykaufman/free-websockets:local'
     build:
-      context: ../
+      context: ../..
       dockerfile: ./docker/Dockerfile

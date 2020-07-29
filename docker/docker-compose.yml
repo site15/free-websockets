@@ -1,0 +1,20 @@
+version: '3'
+networks:
+  free-websockets-network:
+    ipam:
+      config:
+        - subnet: '172.9.0.0/16'
+
+services:
+  free-websockets-server:
+    image: 'endykaufman/free-websockets'
+    container_name: 'free-websockets-server-service'
+    build:
+      context: ../
+      dockerfile: ./docker/Dockerfile
+    user: $UID:$GID
+    networks:
+      - free-websockets-network
+    ports:
+      - '5000:5000'
+    tty: true

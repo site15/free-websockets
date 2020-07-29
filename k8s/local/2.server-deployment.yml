@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: free-websockets-local
+  name: free-websockets-server
+  labels:
+    app: free-websockets-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: free-websockets-server-container
+  template:
+    metadata:
+      namespace: free-websockets-local
+      labels:
+        pod: free-websockets-server-container
+    spec:
+      containers:
+        - name: free-websockets-server
+          image: endykaufman/free-websockets:local
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 5000
