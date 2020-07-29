@@ -2,7 +2,7 @@ name: "Deploy"
 
 on:
   push:
-    branches: [master, ]
+    branches: [master]
   pull_request:
     branches: [master]
 
@@ -12,40 +12,48 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      with:
-        # We must fetch at least the immediate parents so that if this is
-        # a pull request then we can checkout the head.
-        fetch-depth: 2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          # We must fetch at least the immediate parents so that if this is
+          # a pull request then we can checkout the head.
+          fetch-depth: 2
 
-    # If this run was triggered by a pull request event, then checkout
-    # the head of the pull request instead of the merge commit.
-    - run: git checkout HEAD^2
-      if: ${{ github.event_name == 'pull_request' }}
+      # If this run was triggered by a pull request event, then checkout
+      # the head of the pull request instead of the merge commit.
+      - run: git checkout HEAD^2
+        if: ${{ github.event_name == 'pull_request' }}
 
-    - name: Install packages
-      run: npm install      
+      - name: Install packages
+        run: npm install
 
-    - name: Run build server
-      run: npm run build
-        
-    - name: Build and push Docker images
-      uses: docker/build-push-action@v1
-      with:
-        dockerfile: docker/Dockerfile
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com/site15/free-websockets
-        repository: server_service
-        tags: latest
+      - name: Run build server
+        run: npm run build
 
-    - name: Copy K8S files to host
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.USERNAME }}
-        key: ${{ secrets.KEY }}
-        source: "k8s/local"
-        target: "k8s/free-websockets"
-        rm: true
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v1
+        with:
+          dockerfile: docker/Dockerfile
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          registry: docker.pkg.github.com/site15/free-websockets
+          repositoryadd apply: server_service
+          tags: latest
+
+      - name: Copy K8S files to host
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          source: "k8s/local"
+          target: "k8s/free-websockets"
+          rm: true
+
+      - name: Apply to K8S
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: free-websockets/k8s/local/apply.sh
