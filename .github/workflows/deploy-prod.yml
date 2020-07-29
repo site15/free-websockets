@@ -46,8 +46,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "k8s/prod"
-          target: "k8s/free-websockets"
+          source: "k8s/prod/*"
+          target: "k8s/free-websockets/prod"
           rm: true
 
       - name: Apply to K8S
@@ -56,4 +56,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: free-websockets/k8s/prod/apply.sh
+          script: ~/k8s/free-websockets/k8s/prod/apply.sh
