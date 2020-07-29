@@ -39,6 +39,7 @@ jobs:
       with:
         dockerfile: docker/Dockerfile
         username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
         registry: docker.pkg.github.com/site15/free-websockets
         repository: site15/free_websockets
         tag_with_ref: true
