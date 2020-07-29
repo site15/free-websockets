@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: free-websockets-prod
+  name: server_service
+spec:
+  selector:
+    pod: free-websockets-server-container
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: ClusterIP

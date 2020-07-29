@@ -1,4 +1,4 @@
-name: "Deploy"
+name: "Deploy Production"
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Deploy
+    name: Build
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
         run: npm install
 
       - name: Run build server
-        run: npm run build
+        run: npm run build:prod
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
@@ -37,7 +37,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com/site15/free-websockets
-          repositoryadd apply: server_service
+          repository: server_service
           tags: latest
 
       - name: Copy K8S files to host
@@ -46,7 +46,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          source: "k8s/local"
+          source: "k8s/prod"
           target: "k8s/free-websockets"
           rm: true
 
@@ -56,4 +56,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: free-websockets/k8s/local/apply.sh
+          script: free-websockets/k8s/prod/apply.sh

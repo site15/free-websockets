@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: free-websockets-prod
+  name: free-websockets-server
+  labels:
+    app: free-websockets-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod: free-websockets-server-container
+  template:
+    metadata:
+      namespace: free-websockets-prod
+      labels:
+        pod: free-websockets-server-container
+    spec:
+      containers:
+        - name: free-websockets-server
+          image: docker.pkg.github.com/site15/free-websockets:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
