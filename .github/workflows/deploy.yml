@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Deploy
     runs-on: ubuntu-latest
 
     steps:
@@ -40,12 +40,12 @@ jobs:
         repository: server_service
         tags: latest
 
-    - name: Copy K8S files to production
+    - name: Copy K8S files to host
       uses: appleboy/scp-action@master
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USERNAME }}
         key: ${{ secrets.KEY }}
-        source: "k8s/local/1.namespace.yaml, k8s/local/2.server-deployment.yml, k8s/local/3.service.yml, k8s/local/4.issuer.yml, k8s/local/5.ingress.yml"
+        source: "k8s/local"
         target: "k8s/free-websockets"
         rm: true
