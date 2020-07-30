@@ -36,7 +36,7 @@ jobs:
           dockerfile: docker/Dockerfile
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com/site15/free_websockets
+          registry: docker.pkg.github.com/site15/free-websockets
           repository: server_service
           tags: prod
 
