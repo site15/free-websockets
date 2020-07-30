@@ -57,5 +57,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
-            whoami
-            microk8s kubectl apply -f ./vps/free-websockets/k8s/prod
+            /snap/bin/microk8s kubectl delete deployment free-websockets-server -n free-websockets-prod --now
+            /snap/bin/microk8s kubectl apply -f ./vps/free-websockets/k8s/prod
