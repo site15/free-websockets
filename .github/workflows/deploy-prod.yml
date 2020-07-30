@@ -38,7 +38,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com/site15/free-websockets
           repository: server_service
-          tags: prod
+          tag_with_sha: true
 
       - name: Copy K8S files to host
         uses: appleboy/scp-action@master
