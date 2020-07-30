@@ -36,8 +36,8 @@ jobs:
           dockerfile: docker/Dockerfile
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com/site15/free-websockets
-          repository: server_service
+          registry: docker.pkg.github.com/site15
+          repository: free_websockets_server_service
           tags: latest
 
       - name: Copy K8S files to host
