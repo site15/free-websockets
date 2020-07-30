@@ -35,10 +35,10 @@ jobs:
         with:
           dockerfile: docker/Dockerfile
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com/site15/free-websockets
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+          registry: docker.io/site15/free-websockets
           repository: server_service
-          tag_with_sha: true
+          tags: latest
 
       - name: Copy K8S files to host
         uses: appleboy/scp-action@master
