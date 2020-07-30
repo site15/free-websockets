@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           dockerfile: docker/Dockerfile
-          username: ${{ github.actor }}
+          username: endykaufman
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
           registry: docker.io/site15/free-websockets
           repository: server_service
