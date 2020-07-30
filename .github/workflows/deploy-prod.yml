@@ -56,4 +56,6 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
-          script: microk8s kubectl apply -f ./vps/free-websockets/k8s/prod
+          script: |
+            whoami
+            microk8s kubectl apply -f ./vps/free-websockets/k8s/prod
