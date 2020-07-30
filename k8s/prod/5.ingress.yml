@@ -11,8 +11,8 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
     nginx.ingress.kubernetes.io/secure-backends: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/websocket-services: server_service
-    nginx.org/websocket-services: server_service
+    nginx.ingress.kubernetes.io/websocket-services: server-service
+    nginx.org/websocket-services: server-service
 spec:
   tls:
     - hosts:
@@ -24,5 +24,5 @@ spec:
         paths:
           - path: /free-websockets(/|$)(.*)
             backend:
-              serviceName: server_service
+              serviceName: server-service
               servicePort: 5000
