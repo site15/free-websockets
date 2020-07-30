@@ -36,8 +36,8 @@ jobs:
           dockerfile: docker/Dockerfile
           username: endykaufman
           password: ${{ secrets.DOCKER_HUB_TOKEN }}
-          registry: docker.io/site15/free-websockets
-          repository: server_service
+          registry: docker.io
+          repository: site15/free-websockets
           tags: latest
 
       - name: Copy K8S files to host

@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: free-websockets-server
-          image: site15/free-websockets/server_service:latest
+          image: site15/free-websockets:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
