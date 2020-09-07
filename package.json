@@ -17,7 +17,8 @@
     "k8s:local:dashboard": "microk8s dashboard-proxy",
     "build:local": "node -r esm ./scripts/cli.js --base-href /free-websockets/",
     "build:prod": "node -r esm ./scripts/cli.js --base-href /free-websockets/",
-    "build": "node -r esm ./scripts/cli.js"
+    "build": "node -r esm ./scripts/cli.js",    
+    "commit": "npx git-cz"
   },
   "keywords": [],
   "author": "",
