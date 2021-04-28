@@ -23,6 +23,9 @@ spec:
       http:
         paths:
           - path: /free-websockets(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
-              serviceName: server-service
-              servicePort: 5000
+              service:
+                name: server-service
+                port:
+                  number: 5000
