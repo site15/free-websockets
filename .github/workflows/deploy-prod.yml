@@ -55,4 +55,5 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           script: |
+            /snap/bin/microk8s kubectl get secret regcred -n default -o yaml | sed s/"namespace: default"/"namespace: free-websockets-prod"/ | /snap/bin/microk8s kubectl apply -n free-websockets-prod -f -
             /snap/bin/microk8s kubectl apply -f ./vps/free-websockets/k8s/prod

@@ -17,7 +17,7 @@ spec:
   tls:
     - hosts:
         - localhost
-      secretName: echo-tls
+      secretName: free-websockets-local-tls
   rules:
     - host: localhost
       http:

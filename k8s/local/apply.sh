@@ -1,1 +1,2 @@
+/snap/bin/microk8s kubectl get secret regcred -n default -o yaml | sed s/"namespace: default"/"namespace: free-websockets-local"/ | /snap/bin/microk8s kubectl apply -n free-websockets-local -f -
 microk8s kubectl apply -f  ./k8s/local

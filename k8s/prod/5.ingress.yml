@@ -17,7 +17,7 @@ spec:
   tls:
     - hosts:
         - site15.ru
-      secretName: echo-tls
+      secretName: free-websockets-prod-tls
   rules:
     - host: site15.ru
       http:
